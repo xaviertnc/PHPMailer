@@ -4270,7 +4270,10 @@ class PHPMailer
     {
         preg_match_all('/(?<!-)(src|background)=["\'](.*)["\']/Ui', $message, $images);
         if (array_key_exists(2, $images)) {
-            if ($basedir && strlen($basedir) > 1 && '/' !== substr($basedir, -1)) {
+            if (!isset($basedir)) {
+                $basedir = '';
+            }
+            else if (strlen($basedir) > 1 && '/' !== substr($basedir, -1)) {
                 //Ensure $basedir has a trailing /
                 $basedir .= '/';
             }
